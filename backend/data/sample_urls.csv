@@ -1,0 +1,15 @@
+url,label
+https://www.example.com,safe
+https://github.com/login,safe
+https://www.wikipedia.org/wiki/Phishing,safe
+http://secure-login-update.example.com,suspicious
+http://192.168.1.20/verify/account,suspicious
+http://paypal-login-security.example.net/confirm,suspicious
+https://docs.python.org/3/library/urllib.parse.html,safe
+http://bit.ly/claim-prize-now,suspicious
+https://openai.com/research,safe
+http://account-verification-password-reset.example.org,suspicious
+https://www.mozilla.org/en-US/firefox/,safe
+http://free-gift-card-win.example.com/login,suspicious
+https://pypi.org/project/fastapi/,safe
+http://xn--paypa1-9za.example.com/signin,suspicious
