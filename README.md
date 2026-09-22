@@ -9,7 +9,7 @@ An explainable, offline-first ML web application that classifies URLs as **safe*
 - `backend/app/` - FastAPI service, feature extraction, model bootstrap, and explanations
 - `backend/data/sample_urls.csv` - small reproducible training dataset
 - `backend/tests/` - API and feature tests
-- `frontend/` - React/Vite interface
+- `frontend/` - React/Vite interface with URL scanner and model-evaluation dashboard
 
 ## Quick start
 
@@ -36,6 +36,10 @@ npm run dev
 
 The UI runs at `http://localhost:5173`. Copy `.env.example` to `.env` to configure `VITE_API_BASE_URL`.
 
+The frontend includes two views:
+- **URL Scanner**: existing single-URL lexical scan flow
+- **Model Evaluation Dashboard**: interactive KPIs, confusion matrix, feature-level error trends, segment filtering, and evaluated sample rows loaded from the backend
+
 ### Tests and training
 
 ```bash
@@ -53,6 +57,19 @@ python -m app.train --data data/sample_urls.csv
 ```
 
 The response includes `normalized_url`, `verdict`, `score`, `confidence`, and human-readable `reasons`. The service never fetches, resolves, or executes submitted URLs.
+
+`GET /evaluation-data`
+
+Returns offline evaluation results generated from `backend/data/sample_urls.csv` using the local model and lexical features. Each row includes:
+- `url`
+- `actual_label`
+- `predicted_label`
+- `score`
+- `error_flag`
+- `segment`
+- `feature_values` (all `FEATURE_NAMES`)
+
+The response also includes summary metadata (`total_rows`, `accuracy`, `error_rate`, `average_score`, confusion counts, and segment counts) for dashboard KPIs. This endpoint is deterministic and does not use network telemetry.
 
 ## Dataset format
 
